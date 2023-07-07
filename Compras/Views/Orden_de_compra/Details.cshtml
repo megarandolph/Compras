@@ -1,0 +1,74 @@
+﻿@model Compras.Models.Orden_de_compra
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Orden_de_compra</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Fecha_orden)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fecha_orden)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Estado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Estado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cantidad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cantidad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Costo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Costo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Unidades_de_medidas.Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Unidades_de_medidas.Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.usuarios.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.usuarios.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Articulos.Descripción)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Articulos.Descripción)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Numero_de_orden }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

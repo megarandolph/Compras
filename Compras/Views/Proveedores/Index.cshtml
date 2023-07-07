@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Compras.Models.Proveedores>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Cedula_RNC)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Nombre_comercial)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Estado)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cedula_RNC)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nombre_comercial)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Estado)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ProveedorId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ProveedorId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ProveedorId })
+        </td>
+    </tr>
+}
+
+</table>

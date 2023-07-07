@@ -1,0 +1,58 @@
+﻿@model Compras.Models.Articulos
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Articulos</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Descripción)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descripción)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Marca)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Marca)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Unidad_de_medida)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Unidad_de_medida)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Existencia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Existencia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Estado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Estado)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ArticuloId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
