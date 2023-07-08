@@ -25,11 +25,11 @@ namespace Compras.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Articulos> Articulos { get; set; }
         public virtual DbSet<Departamentos> Departamentos { get; set; }
         public virtual DbSet<Orden_de_compra> Orden_de_compra { get; set; }
         public virtual DbSet<Proveedores> Proveedores { get; set; }
         public virtual DbSet<Unidades_de_medidas> Unidades_de_medidas { get; set; }
         public virtual DbSet<usuarios> usuarios { get; set; }
-        public virtual DbSet<Articulos> Articulos { get; set; }
     }
 }

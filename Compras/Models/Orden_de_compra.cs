@@ -23,8 +23,8 @@ namespace Compras.Models
         public Nullable<decimal> Costo { get; set; }
         public Nullable<int> UsuarioId { get; set; }
     
+        public virtual Articulos Articulos { get; set; }
         public virtual Unidades_de_medidas Unidades_de_medidas { get; set; }
         public virtual usuarios usuarios { get; set; }
-        public virtual Articulos Articulos { get; set; }
     }
 }

@@ -8,22 +8,72 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
+
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
         <div class="container">
-            @Html.ActionLink("Sistema de compras", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            @if (Session["Acceso"] != null)
+            {
+                @Html.ActionLink("Sistema de compras", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            }
+            else
+            {
+                <label class="navbar-brand">Sistema de compras</label>
+            }
             <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
                 <ul class="navbar-nav flex-grow-1">
-                    <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Articulos", "Index", "Articulos", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Departamentos", "Index", "Departamentos", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Orden de compras", "Index", "Orden_de_compra", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Proveedores", "Index", "Proveedores", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Unidades de medidas", "Index", "Unidades_de_medidas", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Usuarios", "Index", "Usuarios", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>
+                        @if (Session["Acceso"] != null)
+                        {
+                            @Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })
+                        }
+                    </li>
+                    <li>
+                        @if (Session["Acceso"] != null)
+                        {
+                            @Html.ActionLink("Articulos", "Index", "Articulos", new { area = "" }, new { @class = "nav-link" })
+                        }
+                    </li>
+                    <li>
+                        @if (Session["Acceso"] != null)
+                        {
+                            @Html.ActionLink("Departamentos", "Index", "Departamentos", new { area = "" }, new { @class = "nav-link" })
+                        }
+                    </li>
+                    <li>
+                        @if (Session["Acceso"] != null)
+                        {
+                            @Html.ActionLink("Orden de compras", "Index", "Orden_de_compra", new { area = "" }, new { @class = "nav-link" })
+                        }
+                    </li>
+                    <li>
+                        @if (Session["Acceso"] != null)
+                        {
+                            @Html.ActionLink("Proveedores", "Index", "Proveedores", new { area = "" }, new { @class = "nav-link" })
+                        }
+                    </li>
+                    <li>
+                        @if (Session["Acceso"] != null)
+                        {
+                            @Html.ActionLink("Unidades de medidas", "Index", "Unidades_de_medidas", new { area = "" }, new { @class = "nav-link" })
+                        }
+                    </li>
+                    <li>
+                        @if (Session["Acceso"] != null)
+                        {
+                            @Html.ActionLink("Usuarios", "Index", "Usuarios", new { area = "" }, new { @class = "nav-link" })
+                        }
+                    </li>
+                    <li>
+                        @if (Session["Acceso"] != null)
+                        {
+                            @Html.ActionLink("Salir", "Login", "Home", new { area = "" }, new { @class = "nav-link" })
+                        }
+                    </li>
+
                 </ul>
             </div>
         </div>

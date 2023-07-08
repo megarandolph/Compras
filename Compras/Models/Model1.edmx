@@ -126,102 +126,23 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DBComprasModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Departamentos">
-          <Key>
-            <PropertyRef Name="DepartamentoId" />
-          </Key>
-          <Property Name="DepartamentoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Estado" Type="Boolean" />
-        </EntityType>
-        <EntityType Name="Orden_de_compra">
-          <Key>
-            <PropertyRef Name="Numero_de_orden" />
-          </Key>
-          <Property Name="Numero_de_orden" Type="Int32" Nullable="false" />
-          <Property Name="Fecha_orden" Type="DateTime" Precision="0" />
-          <Property Name="Estado" Type="Boolean" />
-          <Property Name="Articulo" Type="Int32" />
-          <Property Name="Cantidad" Type="Int32" />
-          <Property Name="Unidad_de_medida" Type="Int32" />
-          <Property Name="Costo" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="UsuarioId" Type="Int32" />
-          <NavigationProperty Name="Unidades_de_medidas" Relationship="Self.FK__Orden_de___Unida__403A8C7D" FromRole="Orden_de_compra" ToRole="Unidades_de_medidas" />
-          <NavigationProperty Name="usuarios" Relationship="Self.FK__Orden_de___Usuar__5812160E" FromRole="Orden_de_compra" ToRole="usuarios" />
-          <NavigationProperty Name="Articulos" Relationship="DBComprasModel.FK__Orden_de___Artic__3F466844" FromRole="Orden_de_compra" ToRole="Articulos" />
-        </EntityType>
-        <EntityType Name="Proveedores">
-          <Key>
-            <PropertyRef Name="ProveedorId" />
-          </Key>
-          <Property Name="ProveedorId" Type="Int32" Nullable="false" />
-          <Property Name="Cedula_RNC" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Nombre_comercial" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Estado" Type="Boolean" />
-        </EntityType>
-        <EntityType Name="Unidades_de_medidas">
-          <Key>
-            <PropertyRef Name="UnidadMedidaId" />
-          </Key>
-          <Property Name="UnidadMedidaId" Type="Int32" Nullable="false" />
-          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Estado" Type="Boolean" />
-          <NavigationProperty Name="Orden_de_compra" Relationship="Self.FK__Orden_de___Unida__403A8C7D" FromRole="Unidades_de_medidas" ToRole="Orden_de_compra" />
-        </EntityType>
-        <EntityType Name="usuarios">
-          <Key>
-            <PropertyRef Name="UsuarioId" />
-          </Key>
-          <Property Name="UsuarioId" Type="Int32" Nullable="false" />
-          <Property Name="Nombre" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Apellido" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="User" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Pass" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Correo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Estado" Type="Boolean" />
-          <NavigationProperty Name="Orden_de_compra" Relationship="Self.FK__Orden_de___Usuar__5812160E" FromRole="usuarios" ToRole="Orden_de_compra" />
-        </EntityType>
-        <Association Name="FK__Orden_de___Unida__403A8C7D">
-          <End Role="Unidades_de_medidas" Type="Self.Unidades_de_medidas" Multiplicity="0..1" />
-          <End Role="Orden_de_compra" Type="Self.Orden_de_compra" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Unidades_de_medidas">
-              <PropertyRef Name="UnidadMedidaId" />
-            </Principal>
-            <Dependent Role="Orden_de_compra">
-              <PropertyRef Name="Unidad_de_medida" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Orden_de___Usuar__5812160E">
-          <End Role="usuarios" Type="Self.usuarios" Multiplicity="0..1" />
-          <End Role="Orden_de_compra" Type="Self.Orden_de_compra" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="usuarios">
-              <PropertyRef Name="UsuarioId" />
-            </Principal>
-            <Dependent Role="Orden_de_compra">
-              <PropertyRef Name="UsuarioId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="DBComprasEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Departamentos" EntityType="Self.Departamentos" />
-          <EntitySet Name="Orden_de_compra" EntityType="Self.Orden_de_compra" />
-          <EntitySet Name="Proveedores" EntityType="Self.Proveedores" />
-          <EntitySet Name="Unidades_de_medidas" EntityType="Self.Unidades_de_medidas" />
-          <EntitySet Name="usuarios" EntityType="Self.usuarios" />
-          <AssociationSet Name="FK__Orden_de___Unida__403A8C7D" Association="Self.FK__Orden_de___Unida__403A8C7D">
+          <EntitySet Name="Articulos" EntityType="DBComprasModel.Articulos" />
+          <EntitySet Name="Departamentos" EntityType="DBComprasModel.Departamentos" />
+          <EntitySet Name="Orden_de_compra" EntityType="DBComprasModel.Orden_de_compra" />
+          <EntitySet Name="Proveedores" EntityType="DBComprasModel.Proveedores" />
+          <EntitySet Name="Unidades_de_medidas" EntityType="DBComprasModel.Unidades_de_medidas" />
+          <EntitySet Name="usuarios" EntityType="DBComprasModel.usuarios" />
+          <AssociationSet Name="FK__Orden_de___Artic__3F466844" Association="DBComprasModel.FK__Orden_de___Artic__3F466844">
+            <End Role="Articulos" EntitySet="Articulos" />
+            <End Role="Orden_de_compra" EntitySet="Orden_de_compra" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orden_de___Unida__403A8C7D" Association="DBComprasModel.FK__Orden_de___Unida__403A8C7D">
             <End Role="Unidades_de_medidas" EntitySet="Unidades_de_medidas" />
             <End Role="Orden_de_compra" EntitySet="Orden_de_compra" />
           </AssociationSet>
-          <AssociationSet Name="FK__Orden_de___Usuar__5812160E" Association="Self.FK__Orden_de___Usuar__5812160E">
+          <AssociationSet Name="FK__Orden_de___Usuar__5812160E" Association="DBComprasModel.FK__Orden_de___Usuar__5812160E">
             <End Role="usuarios" EntitySet="usuarios" />
-            <End Role="Orden_de_compra" EntitySet="Orden_de_compra" />
-          </AssociationSet>
-          <EntitySet Name="Articulos" EntityType="DBComprasModel.Articulos" />
-          <AssociationSet Name="FK__Orden_de___Artic__3F466844" Association="DBComprasModel.FK__Orden_de___Artic__3F466844">
-            <End Role="Articulos" EntitySet="Articulos" />
             <End Role="Orden_de_compra" EntitySet="Orden_de_compra" />
           </AssociationSet>
         </EntityContainer>
@@ -237,6 +158,61 @@
           <Property Name="Estado" Type="Boolean" />
           <NavigationProperty Name="Orden_de_compra" Relationship="DBComprasModel.FK__Orden_de___Artic__3F466844" FromRole="Articulos" ToRole="Orden_de_compra" />
         </EntityType>
+        <EntityType Name="Departamentos">
+          <Key>
+            <PropertyRef Name="DepartamentoId" />
+          </Key>
+          <Property Name="DepartamentoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Orden_de_compra">
+          <Key>
+            <PropertyRef Name="Numero_de_orden" />
+          </Key>
+          <Property Name="Numero_de_orden" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fecha_orden" Type="DateTime" Precision="0" />
+          <Property Name="Estado" Type="Boolean" />
+          <Property Name="Articulo" Type="Int32" />
+          <Property Name="Cantidad" Type="Int32" />
+          <Property Name="Unidad_de_medida" Type="Int32" />
+          <Property Name="Costo" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="UsuarioId" Type="Int32" />
+          <NavigationProperty Name="Articulos" Relationship="DBComprasModel.FK__Orden_de___Artic__3F466844" FromRole="Orden_de_compra" ToRole="Articulos" />
+          <NavigationProperty Name="Unidades_de_medidas" Relationship="DBComprasModel.FK__Orden_de___Unida__403A8C7D" FromRole="Orden_de_compra" ToRole="Unidades_de_medidas" />
+          <NavigationProperty Name="usuarios" Relationship="DBComprasModel.FK__Orden_de___Usuar__5812160E" FromRole="Orden_de_compra" ToRole="usuarios" />
+        </EntityType>
+        <EntityType Name="Proveedores">
+          <Key>
+            <PropertyRef Name="ProveedorId" />
+          </Key>
+          <Property Name="ProveedorId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Cedula_RNC" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Nombre_comercial" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Unidades_de_medidas">
+          <Key>
+            <PropertyRef Name="UnidadMedidaId" />
+          </Key>
+          <Property Name="UnidadMedidaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="Boolean" />
+          <NavigationProperty Name="Orden_de_compra" Relationship="DBComprasModel.FK__Orden_de___Unida__403A8C7D" FromRole="Unidades_de_medidas" ToRole="Orden_de_compra" />
+        </EntityType>
+        <EntityType Name="usuarios">
+          <Key>
+            <PropertyRef Name="UsuarioId" />
+          </Key>
+          <Property Name="UsuarioId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Apellido" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="User" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Pass" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Correo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="Boolean" />
+          <NavigationProperty Name="Orden_de_compra" Relationship="DBComprasModel.FK__Orden_de___Usuar__5812160E" FromRole="usuarios" ToRole="Orden_de_compra" />
+        </EntityType>
         <Association Name="FK__Orden_de___Artic__3F466844">
           <End Type="DBComprasModel.Articulos" Role="Articulos" Multiplicity="0..1" />
           <End Type="DBComprasModel.Orden_de_compra" Role="Orden_de_compra" Multiplicity="*" />
@@ -249,67 +225,36 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__Orden_de___Unida__403A8C7D">
+          <End Type="DBComprasModel.Unidades_de_medidas" Role="Unidades_de_medidas" Multiplicity="0..1" />
+          <End Type="DBComprasModel.Orden_de_compra" Role="Orden_de_compra" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Unidades_de_medidas">
+              <PropertyRef Name="UnidadMedidaId" />
+            </Principal>
+            <Dependent Role="Orden_de_compra">
+              <PropertyRef Name="Unidad_de_medida" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orden_de___Usuar__5812160E">
+          <End Type="DBComprasModel.usuarios" Role="usuarios" Multiplicity="0..1" />
+          <End Type="DBComprasModel.Orden_de_compra" Role="Orden_de_compra" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuarios">
+              <PropertyRef Name="UsuarioId" />
+            </Principal>
+            <Dependent Role="Orden_de_compra">
+              <PropertyRef Name="UsuarioId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="DBComprasModelStoreContainer" CdmEntityContainer="DBComprasEntities">
-          <EntitySetMapping Name="Departamentos">
-            <EntityTypeMapping TypeName="DBComprasModel.Departamentos">
-              <MappingFragment StoreEntitySet="Departamentos">
-                <ScalarProperty Name="DepartamentoId" ColumnName="DepartamentoId" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="Estado" ColumnName="Estado" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Orden_de_compra">
-            <EntityTypeMapping TypeName="DBComprasModel.Orden_de_compra">
-              <MappingFragment StoreEntitySet="Orden_de_compra">
-                <ScalarProperty Name="Numero_de_orden" ColumnName="Numero_de_orden" />
-                <ScalarProperty Name="Fecha_orden" ColumnName="Fecha_orden" />
-                <ScalarProperty Name="Estado" ColumnName="Estado" />
-                <ScalarProperty Name="Articulo" ColumnName="Articulo" />
-                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
-                <ScalarProperty Name="Unidad_de_medida" ColumnName="Unidad_de_medida" />
-                <ScalarProperty Name="Costo" ColumnName="Costo" />
-                <ScalarProperty Name="UsuarioId" ColumnName="UsuarioId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Proveedores">
-            <EntityTypeMapping TypeName="DBComprasModel.Proveedores">
-              <MappingFragment StoreEntitySet="Proveedores">
-                <ScalarProperty Name="ProveedorId" ColumnName="ProveedorId" />
-                <ScalarProperty Name="Cedula_RNC" ColumnName="Cedula_RNC" />
-                <ScalarProperty Name="Nombre_comercial" ColumnName="Nombre_comercial" />
-                <ScalarProperty Name="Estado" ColumnName="Estado" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Unidades_de_medidas">
-            <EntityTypeMapping TypeName="DBComprasModel.Unidades_de_medidas">
-              <MappingFragment StoreEntitySet="Unidades_de_medidas">
-                <ScalarProperty Name="UnidadMedidaId" ColumnName="UnidadMedidaId" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="Estado" ColumnName="Estado" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="usuarios">
-            <EntityTypeMapping TypeName="DBComprasModel.usuarios">
-              <MappingFragment StoreEntitySet="usuarios">
-                <ScalarProperty Name="UsuarioId" ColumnName="UsuarioId" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
-                <ScalarProperty Name="User" ColumnName="User" />
-                <ScalarProperty Name="Pass" ColumnName="Pass" />
-                <ScalarProperty Name="Correo" ColumnName="Correo" />
-                <ScalarProperty Name="Estado" ColumnName="Estado" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Articulos">
             <EntityTypeMapping TypeName="DBComprasModel.Articulos">
               <MappingFragment StoreEntitySet="Articulos">
@@ -319,6 +264,61 @@
                 <ScalarProperty Name="Marca" ColumnName="Marca" />
                 <ScalarProperty Name="Descripción" ColumnName="Descripción" />
                 <ScalarProperty Name="ArticuloId" ColumnName="ArticuloId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Departamentos">
+            <EntityTypeMapping TypeName="DBComprasModel.Departamentos">
+              <MappingFragment StoreEntitySet="Departamentos">
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="DepartamentoId" ColumnName="DepartamentoId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orden_de_compra">
+            <EntityTypeMapping TypeName="DBComprasModel.Orden_de_compra">
+              <MappingFragment StoreEntitySet="Orden_de_compra">
+                <ScalarProperty Name="UsuarioId" ColumnName="UsuarioId" />
+                <ScalarProperty Name="Costo" ColumnName="Costo" />
+                <ScalarProperty Name="Unidad_de_medida" ColumnName="Unidad_de_medida" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Articulo" ColumnName="Articulo" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Fecha_orden" ColumnName="Fecha_orden" />
+                <ScalarProperty Name="Numero_de_orden" ColumnName="Numero_de_orden" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Proveedores">
+            <EntityTypeMapping TypeName="DBComprasModel.Proveedores">
+              <MappingFragment StoreEntitySet="Proveedores">
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Nombre_comercial" ColumnName="Nombre_comercial" />
+                <ScalarProperty Name="Cedula_RNC" ColumnName="Cedula_RNC" />
+                <ScalarProperty Name="ProveedorId" ColumnName="ProveedorId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Unidades_de_medidas">
+            <EntityTypeMapping TypeName="DBComprasModel.Unidades_de_medidas">
+              <MappingFragment StoreEntitySet="Unidades_de_medidas">
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="UnidadMedidaId" ColumnName="UnidadMedidaId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="usuarios">
+            <EntityTypeMapping TypeName="DBComprasModel.usuarios">
+              <MappingFragment StoreEntitySet="usuarios">
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+                <ScalarProperty Name="Pass" ColumnName="Pass" />
+                <ScalarProperty Name="User" ColumnName="User" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="UsuarioId" ColumnName="UsuarioId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

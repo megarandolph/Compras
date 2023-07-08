@@ -17,7 +17,7 @@ namespace Compras.Controllers
         // GET: Orden_de_compra
         public ActionResult Index()
         {
-            var orden_de_compra = db.Orden_de_compra.Include(o => o.Unidades_de_medidas).Include(o => o.usuarios).Include(o => o.Articulos);
+            var orden_de_compra = db.Orden_de_compra.Include(o => o.Articulos).Include(o => o.Unidades_de_medidas).Include(o => o.usuarios);
             return View(orden_de_compra.ToList());
         }
 
@@ -39,9 +39,9 @@ namespace Compras.Controllers
         // GET: Orden_de_compra/Create
         public ActionResult Create()
         {
+            ViewBag.Articulo = new SelectList(db.Articulos, "ArticuloId", "Descripción");
             ViewBag.Unidad_de_medida = new SelectList(db.Unidades_de_medidas, "UnidadMedidaId", "Descripcion");
             ViewBag.UsuarioId = new SelectList(db.usuarios, "UsuarioId", "Nombre");
-            ViewBag.Articulo = new SelectList(db.Articulos, "ArticuloId", "Descripción");
             return View();
         }
 
@@ -59,9 +59,9 @@ namespace Compras.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.Articulo = new SelectList(db.Articulos, "ArticuloId", "Descripción", orden_de_compra.Articulo);
             ViewBag.Unidad_de_medida = new SelectList(db.Unidades_de_medidas, "UnidadMedidaId", "Descripcion", orden_de_compra.Unidad_de_medida);
             ViewBag.UsuarioId = new SelectList(db.usuarios, "UsuarioId", "Nombre", orden_de_compra.UsuarioId);
-            ViewBag.Articulo = new SelectList(db.Articulos, "ArticuloId", "Descripción", orden_de_compra.Articulo);
             return View(orden_de_compra);
         }
 
@@ -77,9 +77,9 @@ namespace Compras.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.Articulo = new SelectList(db.Articulos, "ArticuloId", "Descripción", orden_de_compra.Articulo);
             ViewBag.Unidad_de_medida = new SelectList(db.Unidades_de_medidas, "UnidadMedidaId", "Descripcion", orden_de_compra.Unidad_de_medida);
             ViewBag.UsuarioId = new SelectList(db.usuarios, "UsuarioId", "Nombre", orden_de_compra.UsuarioId);
-            ViewBag.Articulo = new SelectList(db.Articulos, "ArticuloId", "Descripción", orden_de_compra.Articulo);
             return View(orden_de_compra);
         }
 
@@ -96,9 +96,9 @@ namespace Compras.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.Articulo = new SelectList(db.Articulos, "ArticuloId", "Descripción", orden_de_compra.Articulo);
             ViewBag.Unidad_de_medida = new SelectList(db.Unidades_de_medidas, "UnidadMedidaId", "Descripcion", orden_de_compra.Unidad_de_medida);
             ViewBag.UsuarioId = new SelectList(db.usuarios, "UsuarioId", "Nombre", orden_de_compra.UsuarioId);
-            ViewBag.Articulo = new SelectList(db.Articulos, "ArticuloId", "Descripción", orden_de_compra.Articulo);
             return View(orden_de_compra);
         }
 
