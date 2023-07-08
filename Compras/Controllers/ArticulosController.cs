@@ -17,7 +17,8 @@ namespace Compras.Controllers
         // GET: Articulos
         public ActionResult Index()
         {
-            return View(db.Articulos.ToList());
+            var articulos = db.Articulos.Include(a => a.Unidades_de_medidas);
+            return View(articulos.ToList());
         }
 
         // GET: Articulos/Details/5
@@ -38,6 +39,7 @@ namespace Compras.Controllers
         // GET: Articulos/Create
         public ActionResult Create()
         {
+            ViewBag.UnidadMedidaId = new SelectList(db.Unidades_de_medidas, "UnidadMedidaId", "Descripcion");
             return View();
         }
 
@@ -46,15 +48,26 @@ namespace Compras.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ArticuloId,Descripción,Marca,Unidad_de_medida,Existencia,Estado")] Articulos articulos)
+        public ActionResult Create([Bind(Include = "ArticuloId,Descripción,Marca,UnidadMedidaId,Existencia,Estado")] Articulos articulos)
         {
             if (ModelState.IsValid)
             {
-                db.Articulos.Add(articulos);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (articulos.Existencia > 0)
+                {
+
+                    db.Articulos.Add(articulos);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ViewBag.UnidadMedidaId = new SelectList(db.Unidades_de_medidas, "UnidadMedidaId", "Descripcion", articulos.UnidadMedidaId);
+                    ViewBag.Existencia = "La existencia tiene que ser mayor a 0";
+                    return View(articulos);
+                }
             }
 
+            ViewBag.UnidadMedidaId = new SelectList(db.Unidades_de_medidas, "UnidadMedidaId", "Descripcion", articulos.UnidadMedidaId);
             return View(articulos);
         }
 
@@ -70,6 +83,7 @@ namespace Compras.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.UnidadMedidaId = new SelectList(db.Unidades_de_medidas, "UnidadMedidaId", "Descripcion", articulos.UnidadMedidaId);
             return View(articulos);
         }
 
@@ -78,14 +92,24 @@ namespace Compras.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ArticuloId,Descripción,Marca,Unidad_de_medida,Existencia,Estado")] Articulos articulos)
+        public ActionResult Edit([Bind(Include = "ArticuloId,Descripción,Marca,UnidadMedidaId,Existencia,Estado")] Articulos articulos)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(articulos).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (articulos.Existencia > 0)
+                {
+                    db.Entry(articulos).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ViewBag.UnidadMedidaId = new SelectList(db.Unidades_de_medidas, "UnidadMedidaId", "Descripcion", articulos.UnidadMedidaId);
+                    ViewBag.Existencia = "La existencia tiene que ser mayor a 0";
+                    return View(articulos);
+                }
             }
+            ViewBag.UnidadMedidaId = new SelectList(db.Unidades_de_medidas, "UnidadMedidaId", "Descripcion", articulos.UnidadMedidaId);
             return View(articulos);
         }
 

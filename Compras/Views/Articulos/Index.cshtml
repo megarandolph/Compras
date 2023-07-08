@@ -18,13 +18,13 @@
             @Html.DisplayNameFor(model => model.Marca)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Unidad_de_medida)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.Existencia)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Estado)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Unidades_de_medidas.Descripcion)
         </th>
         <th></th>
     </tr>
@@ -38,13 +38,13 @@
             @Html.DisplayFor(modelItem => item.Marca)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Unidad_de_medida)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.Existencia)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Estado)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Unidades_de_medidas.Descripcion)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ArticuloId }) |

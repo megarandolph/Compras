@@ -52,7 +52,13 @@ namespace Compras.Controllers
             {
                 db.usuarios.Add(usuarios);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                if (Session["Acceso"] != null)
+                {
+                    return RedirectToAction("Index");
+                }
+                else {
+                    return RedirectToAction("Login","Home");
+                }
             }
 
             return View(usuarios);

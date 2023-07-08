@@ -17,6 +17,7 @@ namespace Compras.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Unidades_de_medidas()
         {
+            this.Articulos = new HashSet<Articulos>();
             this.Orden_de_compra = new HashSet<Orden_de_compra>();
         }
     
@@ -24,6 +25,8 @@ namespace Compras.Models
         public string Descripcion { get; set; }
         public Nullable<bool> Estado { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Articulos> Articulos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Orden_de_compra> Orden_de_compra { get; set; }
     }

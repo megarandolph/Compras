@@ -23,10 +23,11 @@ namespace Compras.Models
         public int ArticuloId { get; set; }
         public string Descripción { get; set; }
         public string Marca { get; set; }
-        public string Unidad_de_medida { get; set; }
+        public Nullable<int> UnidadMedidaId { get; set; }
         public Nullable<int> Existencia { get; set; }
         public Nullable<bool> Estado { get; set; }
     
+        public virtual Unidades_de_medidas Unidades_de_medidas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Orden_de_compra> Orden_de_compra { get; set; }
     }

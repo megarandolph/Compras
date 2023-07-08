@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Compras.Models;
@@ -50,9 +51,19 @@ namespace Compras.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Proveedores.Add(proveedores);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                var esValida = ValidadorCedula(proveedores.Cedula_RNC);
+
+                if (esValida)
+                {
+                    db.Proveedores.Add(proveedores);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ViewBag.Cedula = "La cedula no es valida";
+                    return View(proveedores);
+                }
             }
 
             return View(proveedores);
@@ -82,9 +93,19 @@ namespace Compras.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(proveedores).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                var esValida = ValidadorCedula(proveedores.Cedula_RNC);
+
+                if (esValida)
+                {
+                    db.Entry(proveedores).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ViewBag.Cedula = "La cedula no es valida";
+                    return View(proveedores);
+                }
             }
             return View(proveedores);
         }
@@ -115,6 +136,27 @@ namespace Compras.Controllers
             return RedirectToAction("Index");
         }
 
+        public bool ValidadorCedula(string pCedula)
+        {
+            int vnTotal = 0;
+            string vcCedula = pCedula.Replace("-", "");
+            int pLongCed = vcCedula.Trim().Length;
+            int[] digitoMult = new int[11] { 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1 };
+            if (pLongCed < 11 || pLongCed > 11)
+                return false;
+            for (int vDig = 1; vDig <= pLongCed; vDig++)
+            {
+                int vCalculo = Int32.Parse(vcCedula.Substring(vDig - 1, 1)) * digitoMult[vDig - 1];
+                if (vCalculo < 10)
+                    vnTotal += vCalculo;
+                else
+                    vnTotal += Int32.Parse(vCalculo.ToString().Substring(0, 1)) + Int32.Parse(vCalculo.ToString().Substring(1, 1));
+            }
+            if (vnTotal % 10 == 0)
+                return true;
+            else
+                return false;
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)

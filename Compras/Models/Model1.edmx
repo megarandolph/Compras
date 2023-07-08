@@ -12,7 +12,7 @@
           <Property Name="ArticuloId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Descripción" Type="varchar" MaxLength="100" />
           <Property Name="Marca" Type="varchar" MaxLength="50" />
-          <Property Name="Unidad_de_medida" Type="varchar" MaxLength="20" />
+          <Property Name="UnidadMedidaId" Type="int" />
           <Property Name="Existencia" Type="int" />
           <Property Name="Estado" Type="bit" />
         </EntityType>
@@ -66,6 +66,18 @@
           <Property Name="Correo" Type="varchar" MaxLength="200" />
           <Property Name="Estado" Type="bit" />
         </EntityType>
+        <Association Name="FK__Articulos__Unida__440B1D61">
+          <End Role="Unidades_de_medidas" Type="Self.Unidades_de_medidas" Multiplicity="0..1" />
+          <End Role="Articulos" Type="Self.Articulos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Unidades_de_medidas">
+              <PropertyRef Name="UnidadMedidaId" />
+            </Principal>
+            <Dependent Role="Articulos">
+              <PropertyRef Name="UnidadMedidaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Orden_de___Artic__3F466844">
           <End Role="Articulos" Type="Self.Articulos" Multiplicity="0..1" />
           <End Role="Orden_de_compra" Type="Self.Orden_de_compra" Multiplicity="*" />
@@ -109,6 +121,10 @@
           <EntitySet Name="Proveedores" EntityType="Self.Proveedores" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Unidades_de_medidas" EntityType="Self.Unidades_de_medidas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="usuarios" EntityType="Self.usuarios" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Articulos__Unida__440B1D61" Association="Self.FK__Articulos__Unida__440B1D61">
+            <End Role="Unidades_de_medidas" EntitySet="Unidades_de_medidas" />
+            <End Role="Articulos" EntitySet="Articulos" />
+          </AssociationSet>
           <AssociationSet Name="FK__Orden_de___Artic__3F466844" Association="Self.FK__Orden_de___Artic__3F466844">
             <End Role="Articulos" EntitySet="Articulos" />
             <End Role="Orden_de_compra" EntitySet="Orden_de_compra" />
@@ -133,6 +149,10 @@
           <EntitySet Name="Proveedores" EntityType="DBComprasModel.Proveedores" />
           <EntitySet Name="Unidades_de_medidas" EntityType="DBComprasModel.Unidades_de_medidas" />
           <EntitySet Name="usuarios" EntityType="DBComprasModel.usuarios" />
+          <AssociationSet Name="FK__Articulos__Unida__440B1D61" Association="DBComprasModel.FK__Articulos__Unida__440B1D61">
+            <End Role="Unidades_de_medidas" EntitySet="Unidades_de_medidas" />
+            <End Role="Articulos" EntitySet="Articulos" />
+          </AssociationSet>
           <AssociationSet Name="FK__Orden_de___Artic__3F466844" Association="DBComprasModel.FK__Orden_de___Artic__3F466844">
             <End Role="Articulos" EntitySet="Articulos" />
             <End Role="Orden_de_compra" EntitySet="Orden_de_compra" />
@@ -153,9 +173,10 @@
           <Property Name="ArticuloId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Descripción" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Marca" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Unidad_de_medida" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="UnidadMedidaId" Type="Int32" />
           <Property Name="Existencia" Type="Int32" />
           <Property Name="Estado" Type="Boolean" />
+          <NavigationProperty Name="Unidades_de_medidas" Relationship="DBComprasModel.FK__Articulos__Unida__440B1D61" FromRole="Articulos" ToRole="Unidades_de_medidas" />
           <NavigationProperty Name="Orden_de_compra" Relationship="DBComprasModel.FK__Orden_de___Artic__3F466844" FromRole="Articulos" ToRole="Orden_de_compra" />
         </EntityType>
         <EntityType Name="Departamentos">
@@ -198,6 +219,7 @@
           <Property Name="UnidadMedidaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Estado" Type="Boolean" />
+          <NavigationProperty Name="Articulos" Relationship="DBComprasModel.FK__Articulos__Unida__440B1D61" FromRole="Unidades_de_medidas" ToRole="Articulos" />
           <NavigationProperty Name="Orden_de_compra" Relationship="DBComprasModel.FK__Orden_de___Unida__403A8C7D" FromRole="Unidades_de_medidas" ToRole="Orden_de_compra" />
         </EntityType>
         <EntityType Name="usuarios">
@@ -213,6 +235,18 @@
           <Property Name="Estado" Type="Boolean" />
           <NavigationProperty Name="Orden_de_compra" Relationship="DBComprasModel.FK__Orden_de___Usuar__5812160E" FromRole="usuarios" ToRole="Orden_de_compra" />
         </EntityType>
+        <Association Name="FK__Articulos__Unida__440B1D61">
+          <End Type="DBComprasModel.Unidades_de_medidas" Role="Unidades_de_medidas" Multiplicity="0..1" />
+          <End Type="DBComprasModel.Articulos" Role="Articulos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Unidades_de_medidas">
+              <PropertyRef Name="UnidadMedidaId" />
+            </Principal>
+            <Dependent Role="Articulos">
+              <PropertyRef Name="UnidadMedidaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Orden_de___Artic__3F466844">
           <End Type="DBComprasModel.Articulos" Role="Articulos" Multiplicity="0..1" />
           <End Type="DBComprasModel.Orden_de_compra" Role="Orden_de_compra" Multiplicity="*" />
@@ -249,7 +283,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -260,7 +294,7 @@
               <MappingFragment StoreEntitySet="Articulos">
                 <ScalarProperty Name="Estado" ColumnName="Estado" />
                 <ScalarProperty Name="Existencia" ColumnName="Existencia" />
-                <ScalarProperty Name="Unidad_de_medida" ColumnName="Unidad_de_medida" />
+                <ScalarProperty Name="UnidadMedidaId" ColumnName="UnidadMedidaId" />
                 <ScalarProperty Name="Marca" ColumnName="Marca" />
                 <ScalarProperty Name="Descripción" ColumnName="Descripción" />
                 <ScalarProperty Name="ArticuloId" ColumnName="ArticuloId" />
