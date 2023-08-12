@@ -1,18 +1,18 @@
 ﻿@model IEnumerable<Compras.Models.Orden_de_compra>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Inicio";
 }
 
-<h2>Index</h2>
+<h2>Inicio</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Crear Nuevo", "Create")
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Fecha_orden)
+           Fecha Orden
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Estado)
@@ -24,13 +24,13 @@
             @Html.DisplayNameFor(model => model.Costo)
         </th>
         <th>
-            Articulo
+            Articulos o Descripción
         </th>
         <th>
-            Unidad de medida
+            Unidades de medidas o Descripcion
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.usuarios.Nombre)
+            Nombre de Usuarios
         </th>
         <th></th>
     </tr>
