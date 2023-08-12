@@ -64,6 +64,12 @@
                     <li>
                         @if (Session["Acceso"] != null)
                         {
+                            @Html.ActionLink("Consulta Ordenes de Compra", "VistaOrden", "Orden_de_compra", new { area = "" }, new { @class = "nav-link" })
+                        }
+                    </li>
+                    <li>
+                        @if (Session["Acceso"] != null)
+                        {
                             @Html.ActionLink("Usuarios", "Index", "Usuarios", new { area = "" }, new { @class = "nav-link" })
                         }
                     </li>

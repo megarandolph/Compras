@@ -41,7 +41,14 @@
             @Html.DisplayFor(modelItem => item.Existencia)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Estado)
+            @if ((bool)item.Estado)
+            {
+                <text>Activo</text>
+            }
+            else
+            {
+                <text>Inactivo</text>
+            }
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Unidades_de_medidas.Descripcion)

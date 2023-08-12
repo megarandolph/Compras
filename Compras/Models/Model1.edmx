@@ -36,6 +36,7 @@
           <Property Name="Unidad_de_medida" Type="int" />
           <Property Name="Costo" Type="decimal" Precision="18" Scale="2" />
           <Property Name="UsuarioId" Type="int" />
+          <Property Name="Enviado" Type="bit" />
         </EntityType>
         <EntityType Name="Proveedores">
           <Key>
@@ -65,6 +66,22 @@
           <Property Name="Pass" Type="varchar" MaxLength="200" />
           <Property Name="Correo" Type="varchar" MaxLength="200" />
           <Property Name="Estado" Type="bit" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBCompras.dbo.View_GetOrdenCompra' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="View_GetOrdenCompra">
+          <Key>
+            <PropertyRef Name="Numero_de_orden" />
+          </Key>
+          <Property Name="Numero_de_orden" Type="int" Nullable="false" />
+          <Property Name="Fecha_orden" Type="date" />
+          <Property Name="Estado" Type="bit" />
+          <Property Name="Articulo" Type="varchar" MaxLength="100" />
+          <Property Name="Cantidad" Type="int" />
+          <Property Name="UnidadMedida" Type="varchar" MaxLength="50" />
+          <Property Name="Costo" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Usuario" Type="varchar" MaxLength="200" />
+          <Property Name="Enviado" Type="bit" />
         </EntityType>
         <Association Name="FK__Articulos__Unida__440B1D61">
           <End Role="Unidades_de_medidas" Type="Self.Unidades_de_medidas" Multiplicity="0..1" />
@@ -121,6 +138,19 @@
           <EntitySet Name="Proveedores" EntityType="Self.Proveedores" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Unidades_de_medidas" EntityType="Self.Unidades_de_medidas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="usuarios" EntityType="Self.usuarios" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="View_GetOrdenCompra" EntityType="Self.View_GetOrdenCompra" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [View_GetOrdenCompra].[Numero_de_orden] AS [Numero_de_orden], 
+    [View_GetOrdenCompra].[Fecha_orden] AS [Fecha_orden], 
+    [View_GetOrdenCompra].[Estado] AS [Estado], 
+    [View_GetOrdenCompra].[Articulo] AS [Articulo], 
+    [View_GetOrdenCompra].[Cantidad] AS [Cantidad], 
+    [View_GetOrdenCompra].[UnidadMedida] AS [UnidadMedida], 
+    [View_GetOrdenCompra].[Costo] AS [Costo], 
+    [View_GetOrdenCompra].[Usuario] AS [Usuario], 
+    [View_GetOrdenCompra].[Enviado] AS [Enviado]
+    FROM [dbo].[View_GetOrdenCompra] AS [View_GetOrdenCompra]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK__Articulos__Unida__440B1D61" Association="Self.FK__Articulos__Unida__440B1D61">
             <End Role="Unidades_de_medidas" EntitySet="Unidades_de_medidas" />
             <End Role="Articulos" EntitySet="Articulos" />
@@ -165,6 +195,7 @@
             <End Role="usuarios" EntitySet="usuarios" />
             <End Role="Orden_de_compra" EntitySet="Orden_de_compra" />
           </AssociationSet>
+          <EntitySet Name="View_GetOrdenCompra" EntityType="DBComprasModel.View_GetOrdenCompra" />
         </EntityContainer>
         <EntityType Name="Articulos">
           <Key>
@@ -202,6 +233,7 @@
           <NavigationProperty Name="Articulos" Relationship="DBComprasModel.FK__Orden_de___Artic__3F466844" FromRole="Orden_de_compra" ToRole="Articulos" />
           <NavigationProperty Name="Unidades_de_medidas" Relationship="DBComprasModel.FK__Orden_de___Unida__403A8C7D" FromRole="Orden_de_compra" ToRole="Unidades_de_medidas" />
           <NavigationProperty Name="usuarios" Relationship="DBComprasModel.FK__Orden_de___Usuar__5812160E" FromRole="Orden_de_compra" ToRole="usuarios" />
+          <Property Name="Enviado" Type="Boolean" />
         </EntityType>
         <EntityType Name="Proveedores">
           <Key>
@@ -283,6 +315,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="View_GetOrdenCompra">
+          <Key>
+            <PropertyRef Name="Numero_de_orden" />
+          </Key>
+          <Property Name="Numero_de_orden" Type="Int32" Nullable="false" />
+          <Property Name="Fecha_orden" Type="DateTime" Precision="0" />
+          <Property Name="Estado" Type="Boolean" />
+          <Property Name="Articulo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Cantidad" Type="Int32" />
+          <Property Name="UnidadMedida" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Costo" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Usuario" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Enviado" Type="Boolean" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -313,6 +359,7 @@
           <EntitySetMapping Name="Orden_de_compra">
             <EntityTypeMapping TypeName="DBComprasModel.Orden_de_compra">
               <MappingFragment StoreEntitySet="Orden_de_compra">
+                <ScalarProperty Name="Enviado" ColumnName="Enviado" />
                 <ScalarProperty Name="UsuarioId" ColumnName="UsuarioId" />
                 <ScalarProperty Name="Costo" ColumnName="Costo" />
                 <ScalarProperty Name="Unidad_de_medida" ColumnName="Unidad_de_medida" />
@@ -353,6 +400,21 @@
                 <ScalarProperty Name="Apellido" ColumnName="Apellido" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="UsuarioId" ColumnName="UsuarioId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="View_GetOrdenCompra">
+            <EntityTypeMapping TypeName="DBComprasModel.View_GetOrdenCompra">
+              <MappingFragment StoreEntitySet="View_GetOrdenCompra">
+                <ScalarProperty Name="Enviado" ColumnName="Enviado" />
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+                <ScalarProperty Name="Costo" ColumnName="Costo" />
+                <ScalarProperty Name="UnidadMedida" ColumnName="UnidadMedida" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Articulo" ColumnName="Articulo" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Fecha_orden" ColumnName="Fecha_orden" />
+                <ScalarProperty Name="Numero_de_orden" ColumnName="Numero_de_orden" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

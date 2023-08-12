@@ -32,7 +32,14 @@
             @Html.DisplayFor(modelItem => item.Nombre_comercial)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Estado)
+            @if ((bool)item.Estado)
+            {
+                <text>Activo</text>
+            }
+            else
+            {
+                <text>Inactivo</text>
+            }
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ProveedorId }) |

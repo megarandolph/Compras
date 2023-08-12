@@ -1,0 +1,100 @@
+﻿@model IEnumerable<Compras.Models.View_GetOrdenCompra>
+
+@{
+    ViewBag.Title = "VistaOrden";
+}
+
+<h2>Consulta de Ordenes</h2>
+<br />
+<br />
+<div class="row d-flex">
+
+    @using (Html.BeginForm("VistaOrden", "Orden_de_compra"))
+    {
+        <select class="form-control-lg col-lg-2" name="Parametro" id="Parametro">
+            <option value="1">Usuario</option>
+            <option value="2">Costo</option>
+            <option value="3">Articulo</option>
+        </select>
+
+        <input class="form-control-lg col-lg-8" type="text" name="Busqueda" id="Busqueda" />
+
+        <input class="btn btn-primary col-lg-2" type="submit" value="Buscar"/>
+    }
+</div>
+<table class="table">
+    <tr>
+        <th>
+            Fecha
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Estado)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Articulo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cantidad)
+        </th>
+        <th>
+            Unidad de Medida
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Costo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Usuario)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Enviado)
+        </th>
+
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fecha_orden)
+            </td>
+            <td>
+                @if ((bool)item.Estado)
+                {
+                    <text>Activo</text>
+                }
+                else
+                {
+                    <text>Inactivo</text>
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Articulo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cantidad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UnidadMedida)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Costo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Usuario)
+            </td>
+            <td>
+
+                @if ((bool)item.Enviado)
+                {
+                    <text>Si</text>
+                }
+                else
+                {
+                    <text>No</text>
+                }
+            </td>
+
+        </tr>
+    }
+
+</table>

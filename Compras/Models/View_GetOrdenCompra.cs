@@ -12,20 +12,16 @@ namespace Compras.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Orden_de_compra
+    public partial class View_GetOrdenCompra
     {
         public int Numero_de_orden { get; set; }
         public Nullable<System.DateTime> Fecha_orden { get; set; }
         public Nullable<bool> Estado { get; set; }
-        public Nullable<int> Articulo { get; set; }
+        public string Articulo { get; set; }
         public Nullable<int> Cantidad { get; set; }
-        public Nullable<int> Unidad_de_medida { get; set; }
+        public string UnidadMedida { get; set; }
         public Nullable<decimal> Costo { get; set; }
-        public Nullable<int> UsuarioId { get; set; }
+        public string Usuario { get; set; }
         public Nullable<bool> Enviado { get; set; }
-    
-        public virtual Articulos Articulos { get; set; }
-        public virtual Unidades_de_medidas Unidades_de_medidas { get; set; }
-        public virtual usuarios usuarios { get; set; }
     }
 }

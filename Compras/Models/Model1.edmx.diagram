@@ -7,7 +7,7 @@
       <Diagram DiagramId="cf3077a8c44947ab9c4dc474978a35d0" Name="Diagram1">
         <EntityTypeShape EntityType="DBComprasModel.Articulos" Width="1.5" PointX="3" PointY="1.25" />
         <EntityTypeShape EntityType="DBComprasModel.Departamentos" Width="1.5" PointX="5.75" PointY="5.75" />
-        <EntityTypeShape EntityType="DBComprasModel.Orden_de_compra" Width="1.5" PointX="5.25" PointY="1" />
+        <EntityTypeShape EntityType="DBComprasModel.Orden_de_compra" Width="1.5" PointX="5.5" PointY="0.75" />
         <EntityTypeShape EntityType="DBComprasModel.Proveedores" Width="1.5" PointX="7.75" PointY="0.75" />
         <EntityTypeShape EntityType="DBComprasModel.Unidades_de_medidas" Width="1.5" PointX="0.75" PointY="1.5" />
         <EntityTypeShape EntityType="DBComprasModel.usuarios" Width="1.5" PointX="3" PointY="5.25" />
@@ -15,6 +15,7 @@
         <AssociationConnector Association="DBComprasModel.FK__Orden_de___Artic__3F466844" />
         <AssociationConnector Association="DBComprasModel.FK__Orden_de___Unida__403A8C7D" />
         <AssociationConnector Association="DBComprasModel.FK__Orden_de___Usuar__5812160E" />
+        <EntityTypeShape EntityType="DBComprasModel.View_GetOrdenCompra" Width="1.5" PointX="0.75" PointY="8.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

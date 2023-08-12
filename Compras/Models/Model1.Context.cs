@@ -31,5 +31,6 @@ namespace Compras.Models
         public virtual DbSet<Proveedores> Proveedores { get; set; }
         public virtual DbSet<Unidades_de_medidas> Unidades_de_medidas { get; set; }
         public virtual DbSet<usuarios> usuarios { get; set; }
+        public virtual DbSet<View_GetOrdenCompra> View_GetOrdenCompra { get; set; }
     }
 }

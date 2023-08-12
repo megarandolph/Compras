@@ -54,6 +54,7 @@ namespace Compras.Controllers
         {
             if (ModelState.IsValid)
             {
+                orden_de_compra.Enviado = false;
                 db.Orden_de_compra.Add(orden_de_compra);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -126,6 +127,35 @@ namespace Compras.Controllers
             db.Orden_de_compra.Remove(orden_de_compra);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        public ActionResult VistaOrden()
+        {
+            var data = db.View_GetOrdenCompra.ToList();
+            return View(data);
+        }
+        [HttpPost]
+        public ActionResult VistaOrden(int Parametro, string Busqueda)
+        {
+            var data = new List<View_GetOrdenCompra>();
+
+            if (Parametro == 1)
+            {
+                data = db.View_GetOrdenCompra.Where(x => x.Usuario.Contains(Busqueda)).ToList();
+
+            }
+            else if (Parametro == 2)
+            {
+                var costo = Convert.ToDecimal(Busqueda);
+                data = db.View_GetOrdenCompra.Where(x => x.Costo == costo).ToList();
+
+            }
+            else if (Parametro == 3)
+            {
+                data = db.View_GetOrdenCompra.Where(x => x.Articulo.Contains(Busqueda)).ToList();
+
+            }
+            return View(data);
         }
 
         protected override void Dispose(bool disposing)

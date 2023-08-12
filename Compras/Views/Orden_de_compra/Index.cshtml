@@ -24,10 +24,10 @@
             @Html.DisplayNameFor(model => model.Costo)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Articulos.Descripción)
+            Articulo
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Unidades_de_medidas.Descripcion)
+            Unidad de medida
         </th>
         <th>
             @Html.DisplayNameFor(model => model.usuarios.Nombre)
@@ -41,7 +41,14 @@
             @Html.DisplayFor(modelItem => item.Fecha_orden)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Estado)
+            @if ((bool)item.Estado)
+            {
+                <text>Activo</text>
+            }
+            else
+            {
+                <text>Inactivo</text>
+            }
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Cantidad)
