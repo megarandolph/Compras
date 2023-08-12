@@ -1,10 +1,10 @@
 ﻿@model Compras.Models.usuarios
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Crear";
 }
 
-<h2>Create</h2>
+<h2>Crear</h2>
 
 @using (Html.BeginForm()) 
 {
@@ -67,7 +67,7 @@
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <br>
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Crear" class="btn btn-primary" />
             </div>
         </div>
     </div>
@@ -76,7 +76,7 @@
 <div>
     @if (Session["Acceso"] != null)
     {
-        @Html.ActionLink("Back to List", "Index")
+        @Html.ActionLink("Volver a la lista", "Index")
     }
     else
     {

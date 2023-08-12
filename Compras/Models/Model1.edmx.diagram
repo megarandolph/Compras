@@ -15,7 +15,7 @@
         <AssociationConnector Association="DBComprasModel.FK__Orden_de___Artic__3F466844" />
         <AssociationConnector Association="DBComprasModel.FK__Orden_de___Unida__403A8C7D" />
         <AssociationConnector Association="DBComprasModel.FK__Orden_de___Usuar__5812160E" />
-        <EntityTypeShape EntityType="DBComprasModel.View_GetOrdenCompra" Width="1.5" PointX="0.75" PointY="8.75" />
+        <EntityTypeShape EntityType="DBComprasModel.View_GetOrdenCompra" Width="1.5" PointX="0.875" PointY="6" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

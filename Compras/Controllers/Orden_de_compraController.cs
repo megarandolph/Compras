@@ -138,23 +138,36 @@ namespace Compras.Controllers
         public ActionResult VistaOrden(int Parametro, string Busqueda)
         {
             var data = new List<View_GetOrdenCompra>();
-
-            if (Parametro == 1)
+            try
             {
-                data = db.View_GetOrdenCompra.Where(x => x.Usuario.Contains(Busqueda)).ToList();
+                if (Parametro == 1)
+                {
+                    data = db.View_GetOrdenCompra.Where(x => x.Usuario.Contains(Busqueda)).ToList();
 
+                }
+                else if (Parametro == 2)
+                {
+
+                    var costo = Convert.ToDecimal(Busqueda);
+                    data = db.View_GetOrdenCompra.Where(x => x.Costo == costo).ToList();
+
+                }
+                else if (Parametro == 3)
+                {
+                    data = db.View_GetOrdenCompra.Where(x => x.Articulo.Contains(Busqueda)).ToList();
+
+                }
             }
-            else if (Parametro == 2)
+            catch (Exception)
             {
-                var costo = Convert.ToDecimal(Busqueda);
-                data = db.View_GetOrdenCompra.Where(x => x.Costo == costo).ToList();
+               data = db.View_GetOrdenCompra.ToList();
+            }     
+            return View(data);
+        }
 
-            }
-            else if (Parametro == 3)
-            {
-                data = db.View_GetOrdenCompra.Where(x => x.Articulo.Contains(Busqueda)).ToList();
-
-            }
+        public ActionResult EnvioContabilidad()
+        {
+            var data = db.View_GetOrdenCompra.ToList();
             return View(data);
         }
 
