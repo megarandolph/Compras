@@ -82,6 +82,7 @@ warning 6002: The table/view 'DBCompras.dbo.View_GetOrdenCompra' does not have a
           <Property Name="Costo" Type="decimal" Precision="18" Scale="2" />
           <Property Name="Usuario" Type="varchar" MaxLength="200" />
           <Property Name="Enviado" Type="bit" />
+          <Property Name="Monto" Type="decimal" Precision="29" Scale="2" />
         </EntityType>
         <Association Name="FK__Articulos__Unida__440B1D61">
           <End Role="Unidades_de_medidas" Type="Self.Unidades_de_medidas" Multiplicity="0..1" />
@@ -148,7 +149,8 @@ warning 6002: The table/view 'DBCompras.dbo.View_GetOrdenCompra' does not have a
     [View_GetOrdenCompra].[UnidadMedida] AS [UnidadMedida], 
     [View_GetOrdenCompra].[Costo] AS [Costo], 
     [View_GetOrdenCompra].[Usuario] AS [Usuario], 
-    [View_GetOrdenCompra].[Enviado] AS [Enviado]
+    [View_GetOrdenCompra].[Enviado] AS [Enviado], 
+    [View_GetOrdenCompra].[Monto] AS [Monto]
     FROM [dbo].[View_GetOrdenCompra] AS [View_GetOrdenCompra]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK__Articulos__Unida__440B1D61" Association="Self.FK__Articulos__Unida__440B1D61">
@@ -328,6 +330,7 @@ warning 6002: The table/view 'DBCompras.dbo.View_GetOrdenCompra' does not have a
           <Property Name="Costo" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="Usuario" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="Enviado" Type="Boolean" />
+          <Property Name="Monto" Type="Decimal" Precision="29" Scale="2" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -406,6 +409,7 @@ warning 6002: The table/view 'DBCompras.dbo.View_GetOrdenCompra' does not have a
           <EntitySetMapping Name="View_GetOrdenCompra">
             <EntityTypeMapping TypeName="DBComprasModel.View_GetOrdenCompra">
               <MappingFragment StoreEntitySet="View_GetOrdenCompra">
+                <ScalarProperty Name="Monto" ColumnName="Monto" />
                 <ScalarProperty Name="Enviado" ColumnName="Enviado" />
                 <ScalarProperty Name="Usuario" ColumnName="Usuario" />
                 <ScalarProperty Name="Costo" ColumnName="Costo" />

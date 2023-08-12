@@ -4,9 +4,15 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
+using System.Security.Cryptography.Xml;
+using System.Text;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Compras.Models;
+using Microsoft.Ajax.Utilities;
+using Newtonsoft.Json;
 
 namespace Compras.Controllers
 {
@@ -148,8 +154,8 @@ namespace Compras.Controllers
                 else if (Parametro == 2)
                 {
 
-                    var costo = Convert.ToDecimal(Busqueda);
-                    data = db.View_GetOrdenCompra.Where(x => x.Costo == costo).ToList();
+                    var Monto = Convert.ToDecimal(Busqueda);
+                    data = db.View_GetOrdenCompra.Where(x => x.Monto == Monto).ToList();
 
                 }
                 else if (Parametro == 3)
@@ -160,14 +166,60 @@ namespace Compras.Controllers
             }
             catch (Exception)
             {
-               data = db.View_GetOrdenCompra.ToList();
-            }     
+                data = db.View_GetOrdenCompra.ToList();
+            }
             return View(data);
         }
 
         public ActionResult EnvioContabilidad()
         {
-            var data = db.View_GetOrdenCompra.ToList();
+            var data = db.View_GetOrdenCompra.Where(x => x.Enviado == false).ToList();
+            return View(data);
+        }
+        [HttpPost]
+        public async Task<ActionResult> EnvioContabilidad(int envio = 0)
+        {
+            var data = new List<View_GetOrdenCompra>();
+            try
+            {
+                data = db.View_GetOrdenCompra.Where(x => x.Enviado == false).ToList();
+
+                var client = new HttpClient();
+                var request = new HttpRequestMessage(HttpMethod.Post, "http://129.80.203.120:5000/post-accounting-entries");
+
+                var monto = data.Select(x=>x.Monto).Sum();
+
+                var dataObject = new
+                {
+                    descripcion = "Compras enviado el "+DateTime.UtcNow.AddHours(-4),
+                    auxiliar = 7,
+                    cuentaDB = 80,
+                    cuentaCR = 4,
+                    monto = monto
+                };
+                
+                string jsonData = JsonConvert.SerializeObject(dataObject);
+                var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
+                request.Content = content;
+                var response = await client.SendAsync(request);
+                response.EnsureSuccessStatusCode();
+
+                foreach (var item in data)
+                {
+                    var UpdateItem = db.Orden_de_compra.Find(item.Numero_de_orden);
+                    UpdateItem.Enviado = true;
+                    
+                    db.SaveChanges();
+                }
+
+                ViewBag.MensajeEnviado = "Se ha enviado correctamente las ordenes de compras al sistema de contabilidad";
+            }
+            catch (Exception)
+            {
+                ViewBag.MensajeEnviado = "Ha ocurrido un error enviando las ordenes de compras al sistema de contabilidad";
+            }
+            data = db.View_GetOrdenCompra.Where(x => x.Enviado == false).ToList();
+
             return View(data);
         }
 

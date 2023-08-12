@@ -23,5 +23,6 @@ namespace Compras.Models
         public Nullable<decimal> Costo { get; set; }
         public string Usuario { get; set; }
         public Nullable<bool> Enviado { get; set; }
+        public Nullable<decimal> Monto { get; set; }
     }
 }
