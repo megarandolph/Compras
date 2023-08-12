@@ -50,6 +50,7 @@ namespace Compras.Controllers
         {
             if (ModelState.IsValid)
             {
+                unidades_de_medidas.Estado = true;
                 db.Unidades_de_medidas.Add(unidades_de_medidas);
                 db.SaveChanges();
                 return RedirectToAction("Index");

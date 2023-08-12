@@ -54,7 +54,7 @@ namespace Compras.Controllers
             {
                 if (articulos.Existencia > 0)
                 {
-
+                    articulos.Estado = true;
                     db.Articulos.Add(articulos);
                     db.SaveChanges();
                     return RedirectToAction("Index");

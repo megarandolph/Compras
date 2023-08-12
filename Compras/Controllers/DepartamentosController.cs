@@ -50,6 +50,8 @@ namespace Compras.Controllers
         {
             if (ModelState.IsValid)
             {
+                departamentos.Estado = true;
+
                 db.Departamentos.Add(departamentos);
                 db.SaveChanges();
                 return RedirectToAction("Index");

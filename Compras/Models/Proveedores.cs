@@ -11,11 +11,14 @@ namespace Compras.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Proveedores
     {
         public int ProveedorId { get; set; }
+        [Required]
         public string Cedula_RNC { get; set; }
+        [Required]
         public string Nombre_comercial { get; set; }
         public Nullable<bool> Estado { get; set; }
     }

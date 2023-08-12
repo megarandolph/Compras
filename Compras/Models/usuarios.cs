@@ -11,7 +11,8 @@ namespace Compras.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class usuarios
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,10 +22,16 @@ namespace Compras.Models
         }
     
         public int UsuarioId { get; set; }
+        [Required]
         public string Nombre { get; set; }
+        [Required]
         public string Apellido { get; set; }
+        [Required]
         public string User { get; set; }
+        [Required]
         public string Pass { get; set; }
+        [Required]
+        [EmailAddress]
         public string Correo { get; set; }
         public Nullable<bool> Estado { get; set; }
     

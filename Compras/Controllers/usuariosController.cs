@@ -48,17 +48,25 @@ namespace Compras.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "UsuarioId,Nombre,Apellido,User,Pass,Correo,Estado")] usuarios usuarios)
         {
-            if (ModelState.IsValid)
+            var existe = db.usuarios.Where(x => x.User == usuarios.User).ToList();
+
+            if (ModelState.IsValid && existe.Count() == 0)
             {
+                usuarios.Estado = true;
+
                 db.usuarios.Add(usuarios);
                 db.SaveChanges();
                 if (Session["Acceso"] != null)
                 {
                     return RedirectToAction("Index");
                 }
-                else {
-                    return RedirectToAction("Login","Home");
+                else
+                {
+                    return RedirectToAction("Login", "Home");
                 }
+            }
+            else {
+                ViewBag.ExisteUsuario = "Este usuario ya existe, intente con otro";
             }
 
             return View(usuarios);

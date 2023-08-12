@@ -11,10 +11,12 @@ namespace Compras.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Departamentos
     {
         public int DepartamentoId { get; set; }
+        [Required]
         public string Nombre { get; set; }
         public Nullable<bool> Estado { get; set; }
     }

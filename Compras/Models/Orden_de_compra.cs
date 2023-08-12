@@ -11,16 +11,23 @@ namespace Compras.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Orden_de_compra
     {
         public int Numero_de_orden { get; set; }
+        [Required]
         public Nullable<System.DateTime> Fecha_orden { get; set; }
         public Nullable<bool> Estado { get; set; }
+        [Required]
         public Nullable<int> Articulo { get; set; }
+        [Required]
         public Nullable<int> Cantidad { get; set; }
+        [Required]
         public Nullable<int> Unidad_de_medida { get; set; }
+        [Required]
         public Nullable<decimal> Costo { get; set; }
+        [Required]
         public Nullable<int> UsuarioId { get; set; }
         public Nullable<bool> Enviado { get; set; }
     

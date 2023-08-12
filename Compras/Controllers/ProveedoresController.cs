@@ -55,6 +55,8 @@ namespace Compras.Controllers
 
                 if (esValida)
                 {
+                    proveedores.Estado = true;
+
                     db.Proveedores.Add(proveedores);
                     db.SaveChanges();
                     return RedirectToAction("Index");

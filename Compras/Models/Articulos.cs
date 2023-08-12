@@ -11,7 +11,8 @@ namespace Compras.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Articulos
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,9 +22,13 @@ namespace Compras.Models
         }
     
         public int ArticuloId { get; set; }
+        [Required]
         public string Descripción { get; set; }
+        [Required]
         public string Marca { get; set; }
+        [Required]
         public Nullable<int> UnidadMedidaId { get; set; }
+        [Required]
         public Nullable<int> Existencia { get; set; }
         public Nullable<bool> Estado { get; set; }
     

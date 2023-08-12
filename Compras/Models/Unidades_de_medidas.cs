@@ -11,7 +11,8 @@ namespace Compras.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Unidades_de_medidas
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,6 +23,7 @@ namespace Compras.Models
         }
     
         public int UnidadMedidaId { get; set; }
+        [Required]
         public string Descripcion { get; set; }
         public Nullable<bool> Estado { get; set; }
     

@@ -58,12 +58,17 @@ namespace Compras.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Numero_de_orden,Fecha_orden,Estado,Articulo,Cantidad,Unidad_de_medida,Costo,UsuarioId")] Orden_de_compra orden_de_compra)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && orden_de_compra.Costo > 0)
             {
                 orden_de_compra.Enviado = false;
+                orden_de_compra.Estado = true;
+
                 db.Orden_de_compra.Add(orden_de_compra);
                 db.SaveChanges();
                 return RedirectToAction("Index");
+            }
+            else {
+                ViewBag.ErrorCosto = "El costo tiene que ser mayor a 0";
             }
 
             ViewBag.Articulo = new SelectList(db.Articulos, "ArticuloId", "Descripción", orden_de_compra.Articulo);
@@ -183,7 +188,10 @@ namespace Compras.Controllers
             try
             {
                 data = db.View_GetOrdenCompra.Where(x => x.Enviado == false).ToList();
-
+                if (data.Count == 0) {
+                    ViewBag.MensajeEnviado = "No hay datos para enviar";
+                        return View(data);
+                }
                 var client = new HttpClient();
                 var request = new HttpRequestMessage(HttpMethod.Post, "http://129.80.203.120:5000/post-accounting-entries");
 
